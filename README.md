@@ -34,7 +34,7 @@ A 600-day minimum continuous observation filter was applied to:
 - Preserve Iceland’s longest uninterrupted segment
 
 ### 365-Day Sensitivity Check
-
+<img width="4207" height="1871" alt="final_verification_365" src="https://github.com/user-attachments/assets/6b660424-02f3-4d7b-a23f-a714b7ad884c" />
 To validate structural robustness, the analysis was repeated using a 365-day threshold.
 
 Result:
@@ -56,12 +56,28 @@ Advanced Score =
 (Visibility * 0.10) +
 (Log(Duration) * 0.15)
 
+<img width="2330" height="2036" alt="correlation_matrix" src="https://github.com/user-attachments/assets/052c4271-2321-41bb-ad36-759bf4d94849" />
+
 
 Design decisions:
 
 - Cloud coverage weighted highest (60%) due to its dominant real-world impact
 - Log transformation applied to duration to normalize extreme values
 - Weighted structure ensures interpretability with non-linear influence
+
+---
+
+## Model Robustness: Sensitivity Analysis
+
+To validate the stability of our ranking, a Sensitivity Analysis was performed by shifting the model weights toward two extreme scenarios:
+
+Cloud-Heavy Model (70% weight): Testing if cloud obstruction remains the primary bottleneck.
+
+Darkness-Heavy Model (80% weight): Testing the impact of extreme polar night conditions.
+
+<img width="3564" height="2073" alt="sensitivity_results" src="https://github.com/user-attachments/assets/1ff58850-1bca-4489-a2b3-6d3f78e75a09" />
+
+Key Finding: Despite significant weight shifts, the top-tier rankings remained consistent (Sweden > Latvia > Russia). This proves that the visibility lead in these regions is not a byproduct of specific weighting but a statistically grounded environmental reality.
 
 ---
 
@@ -98,5 +114,6 @@ Processed data was persisted into SQLite (`aurora_analysis.db`) to:
 git clone <repo_url>
 pip install -r requirements.txt
 notebooks/aurora_analysis.ipynb
+
 
 
